@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://nguyenhoanggiadai1412.github.io/techworld-map",
+  "homepage": "https://techworldmap.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
