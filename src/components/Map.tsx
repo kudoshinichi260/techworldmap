@@ -14,6 +14,7 @@
     const [showForm, setShowForm] = useState(false);
     const [point, setPoint] = useState<{ lat: number; lng: number } | null>(null);
     const [markers, setMarkers] = useState<MarkerPoint[]>([]);
+    console.log(markers);
     useEffect(() => {
       const map = L.map("map", {
         center: [10.8, 106.6],
