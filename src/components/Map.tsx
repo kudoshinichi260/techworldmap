@@ -2,43 +2,43 @@
   import "leaflet.control.layers.tree/L.Control.Layers.Tree.css";
   import "leaflet.control.layers.tree";
   import L from "leaflet";
-  import { useEffect, useRef, useState } from "react";
-  import Popup from "./Popup/Popup";
-  interface MarkerPoint {
-    name: string;
-    lat: number;
-    lng: number;
-  }
+  import { useEffect, useRef} from "react";
+  // import Popup from "./Popup/Popup";
+  // interface MarkerPoint {
+  //   name: string;
+  //   lat: number;
+  //   lng: number;
+  // }
   export default function Map() {
     const mapRef = useRef<L.Map | null>(null);
-    const [showForm, setShowForm] = useState(false);
-    const [point, setPoint] = useState<{ lat: number; lng: number } | null>(null);
-    const [markers, setMarkers] = useState<MarkerPoint[]>([]);
-    console.log(markers);
+    // const [showForm, setShowForm] = useState(false);
+    // const [point, setPoint] = useState<{ lat: number; lng: number } | null>(null);
+    // const [markers, setMarkers] = useState<MarkerPoint[]>([]);
+    // console.log(markers);
     useEffect(() => {
       const map = L.map("map", {
-        center: [10.8, 106.6],
+        center: [18.34, 105.90],
         zoom: 10,
       });
       mapRef.current = map;
       // Define custom red icon
-      const redIcon = L.icon({
-        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
-        shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41],
-      });
+      // const redIcon = L.icon({
+      //   iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+      //   shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
+      //   iconSize: [25, 41],
+      //   iconAnchor: [12, 41],
+      //   popupAnchor: [1, -34],
+      //   shadowSize: [41, 41],
+      // });
       // Fetch marker points from point.json
-    fetch("/point.json")
-        .then((res) => res.json())
-        .then((data: MarkerPoint[]) => {
-          setMarkers(data);
-          data.forEach((m) => {
-            L.marker([m.lat, m.lng], { icon: redIcon }).bindPopup(m.name).addTo(map);
-          });
-        });
+      // fetch("/point.json")
+      //   .then((res) => res.json())
+      //   .then((data: MarkerPoint[]) => {
+      //     setMarkers(data);
+      //     data.forEach((m) => {
+      //       L.marker([m.lat, m.lng], { icon: redIcon }).bindPopup(m.name).addTo(map);
+      //     });
+      // });
       // --- BASE MAPS ---
       const street = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -221,91 +221,93 @@
       // Turn on some WMS layers by default
       // wmsLayers["Mạng dòng chảy"].addTo(map);
       wmsLayers["Sông - Suối"].addTo(map);
-      map.on("click", function (e) {
-        const { lat, lng } = e.latlng;
+      // Handle map click to show popup
+      // map.on("click", function (e) {
+      //   const { lat, lng } = e.latlng;
 
-          L.popup()
-            .setLatLng(e.latlng)
-            .setContent(`
-                <div style="
-                    padding: 12px;
-                    font-family: Arial;
-                    min-width: 100px;
-                  ">
-                    <h3 style="margin-top: 0; font-size: 16px; color: #007bff;">
-                      Tọa độ
-                    </h3>
+      //     L.popup()
+      //       .setLatLng(e.latlng)
+      //       .setContent(`
+      //           <div style="
+      //               padding: 12px;
+      //               font-family: Arial;
+      //               min-width: 100px;
+      //             ">
+      //               <h3 style="margin-top: 0; font-size: 16px; color: #007bff;">
+      //                 Tọa độ
+      //               </h3>
 
-                    <div style="padding: 8px 0;">
-                      <b>Lat:</b> ${lat.toFixed(6)} <br>
-                      <b>Lng:</b> ${lng.toFixed(6)}
-                    </div>
+      //               <div style="padding: 8px 0;">
+      //                 <b>Lat:</b> ${lat.toFixed(6)} <br>
+      //                 <b>Lng:</b> ${lng.toFixed(6)}
+      //               </div>
 
-                    <button id="btnAddDesc" style="
-                      padding: 10px 10px;
-                      background: #28a745;
-                      color: white;
-                      border: none;
-                      border-radius: 4px;
-                      cursor: pointer;
-                    ">
-                      Thêm mô tả
-                    </button>
-                  </div>
-            `)
-            .openOn(map);
-            setTimeout(() => {
-                const btn = document.getElementById("btnAddDesc");
-                if (btn) {
-                  btn.addEventListener("click", () => {
-                    setPoint({ lat, lng });
-                    setShowForm(true);
-                  });
-                }
-              }, 10);
-        });
+      //               <button id="btnAddDesc" style="
+      //                 padding: 10px 10px;
+      //                 background: #28a745;
+      //                 color: white;
+      //                 border: none;
+      //                 border-radius: 4px;
+      //                 cursor: pointer;
+      //               ">
+      //                 Thêm mô tả
+      //               </button>
+      //             </div>
+      //       `)
+      //       .openOn(map);
+      //       setTimeout(() => {
+      //           const btn = document.getElementById("btnAddDesc");
+      //           if (btn) {
+      //             btn.addEventListener("click", () => {
+      //               setPoint({ lat, lng });
+      //               setShowForm(true);
+      //             });
+      //           }
+      //         }, 10);
+      //   });
         
       // Cleanup when unmount
       return () => {
         map.remove();
       };
     }, []);
-      const handleSubmit = async (formData: FormData) => {
-      try {
-        const res = await fetch("http://localhost:8081/api/markers", {
-          method: "POST",
-          body: formData, // multipart/form-data
-        });
-        if (!res.ok) throw new Error("Lưu thất bại");
-        const saved: MarkerPoint = await res.json();
+    // Handle form submit from Popup
+    //   const handleSubmit = async (formData: FormData) => {
+    //   try {
+    //     const res = await fetch("http://localhost:8081/api/markers", {
+    //       method: "POST",
+    //       body: formData, // multipart/form-data
+    //     });
+    //     if (!res.ok) throw new Error("Lưu thất bại");
+    //     const saved: MarkerPoint = await res.json();
 
-        // Thêm marker mới trên map
-        if (mapRef.current) {
-          const redIcon = L.icon({
-            iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
-            shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41],
-          });
-          L.marker([saved.lat, saved.lng], { icon: redIcon }).bindPopup(saved.name).addTo(mapRef.current);
-        }
+    //     // Thêm marker mới trên map
+    //     if (mapRef.current) {
+    //       const redIcon = L.icon({
+    //         iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    //         shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
+    //         iconSize: [25, 41],
+    //         iconAnchor: [12, 41],
+    //         popupAnchor: [1, -34],
+    //         shadowSize: [41, 41],
+    //       });
+    //       L.marker([saved.lat, saved.lng], { icon: redIcon }).bindPopup(saved.name).addTo(mapRef.current);
+    //     }
 
-        // cập nhật state marker
-        setMarkers((prev) => [...prev, saved]);
-        setShowForm(false);
-      } catch (err) {
-        console.error(err);
-        alert("Lưu marker thất bại!");
-      }
-    };
+    //     // cập nhật state marker
+    //     setMarkers((prev) => [...prev, saved]);
+    //     setShowForm(false);
+    //   } catch (err) {
+    //     console.error(err);
+    //     alert("Lưu marker thất bại!");
+    //   }
+    // };
     return (
       <div>
         <div id="map" style={{ height: "100vh", width: "100%" }} />
-        {showForm && point && (
+        {/* {showForm && point && (
           <Popup lat={point.lat} lng={point.lng} onClose={() => setShowForm(false)} onSubmit={handleSubmit} />
-        )}
+        )} */}
       </div>
     );
   }
