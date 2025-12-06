@@ -202,6 +202,6 @@
     }, []);
     
     return (
-        <div id="map" style={{ height: "calc(100vh - 16px)", width: "100%" }} />
+        <div id="map" style={{ height: "100vh", width: "100%" } } />
     );
   }
