@@ -9,6 +9,7 @@
       const map = L.map("map", {
         center: [18.34, 105.90],
         zoom: 10,
+        attributionControl: false,
       });
       mapRef.current = map;
       // --- BASE MAPS ---
@@ -201,6 +202,6 @@
     }, []);
     
     return (
-        <div id="map" style={{ height: "95vh", width: "100%" }} />
+        <div id="map" style={{ height: "calc(100vh - 16px)", width: "100%" }} />
     );
   }
