@@ -37,9 +37,9 @@
 
       const baseMaps: Record<string, L.TileLayer> = {
         "Street Map": street,
-        Satellite: satellite,
+        "Satellite": satellite,
         "Dark Mode": dark,
-        Terrain: terrain,
+        "Terrain": terrain,
       };
 
       // --- WMS LAYERS ---
@@ -201,8 +201,6 @@
     }, []);
     
     return (
-      <div>
-        <div id="map" style={{ height: "100vh", width: "100%" }} />
-      </div>
+        <div id="map" style={{ height: "95vh", width: "100%" }} />
     );
   }
