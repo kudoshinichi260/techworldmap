@@ -25,7 +25,7 @@
      { layertable: "gis:rg_tinh_new", layername: "Ranh giới tỉnh", style: "rg_tinh_new"},
     { layertable: "gis:rg_kcnc_new", layername: "Ranh giới xã",style: "rg_kvnc_new"},
    
-    { layertable: "gis:htsd_dat_fix2000", layername: "Hiện trạng sử dụng đất 2024" },
+    { layertable: "gis:htsd_dat_fix2000", layername: "Hiện trạng sử dụng đất 2024", style:"hientrangsudungdat2024" },
   ];
   export default function Map() {
     const mapRef = useRef<L.Map | null>(null);
