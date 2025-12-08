@@ -2,6 +2,7 @@
   import "leaflet.control.layers.tree/L.Control.Layers.Tree.css";
   import "leaflet.control.layers.tree";
   import L from "leaflet";
+  import styles from "./Map.module.css";
   import { useEffect, useRef} from "react";
   export interface Layer {
     layertable: string,
@@ -9,7 +10,9 @@
     style?: string,
   } 
   const layers: Layer[] = [
-  // Giao thông
+    //Biển đảo Việt Nam
+    { layertable: "gis:biendao", layername: "Biển đảo", style: "biendao" },
+    // Giao thông
     { layertable: "gis:giaothong", layername: "Giao thông", style: "giaothong" },
     { layertable: "gis:duongsat", layername: "Đường sắt",style: "duongsat" },
 
@@ -19,8 +22,9 @@
     { layertable: "gis:kenhmuongthuyloi", layername: "Kênh mương thủy lợi",style: "kenhmuongthuyloi" },
 
     // Biên giới - Địa giới
+     { layertable: "gis:rg_tinh_new", layername: "Ranh giới tỉnh", style: "rg_tinh_new"},
     { layertable: "gis:rg_kcnc_new", layername: "Ranh giới xã",style: "rg_kvnc_new"},
-    { layertable: "gis:rg_tinh_new", layername: "Ranh giới tỉnh", style: "rg_tinh_new"},
+   
     { layertable: "gis:htsd_dat_fix2000", layername: "Hiện trạng sử dụng đất 2024" },
   ];
   export default function Map() {
@@ -88,8 +92,9 @@
       const borderGroup = {
         label: "Biên giới - Địa giới",
         children: [
-          { label: "Ranh giới xã", layer: wmsLayers["Ranh giới xã"] },
           { label: "Ranh giới tỉnh", layer: wmsLayers["Ranh giới tỉnh"] },
+          { label: "Ranh giới xã", layer: wmsLayers["Ranh giới xã"] },
+          
            { label: "Hiện trạng sử dụng đất 2024", layer: wmsLayers["Hiện trạng sử dụng đất 2024"] },
         ],
       };
@@ -108,7 +113,25 @@
       // Turn on some WMS layers by default
       // wmsLayers["Mạng dòng chảy"].addTo(map);
       // wmsLayers["Sông - Suối"].addTo(map);
-      
+       wmsLayers["Biển đảo"].addTo(map);
+      // Hoàng Sa
+      L.marker([16.551389, 112.338889], {
+        icon: L.divIcon({
+          className: styles.islandLabel,
+          html: "Quần đảo Hoàng Sa (Việt Nam)",
+          iconSize: [0, 0]
+        })
+      }).addTo(map);
+
+      // Trường Sa
+      L.marker([10.911667, 114.242500], {
+        icon: L.divIcon({
+          className: styles.islandLabel,
+          html: "Quần đảo Trường Sa (Việt Nam)",
+          iconSize: [0, 0]
+        })
+      }).addTo(map);
+
       // Cleanup when unmount
       return () => {
         map.remove();
