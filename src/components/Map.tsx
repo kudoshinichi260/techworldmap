@@ -3,7 +3,7 @@
   import "leaflet.control.layers.tree";
   import L from "leaflet";
   import styles from "./Map.module.css";
-  import { useEffect, useRef, useState} from "react";
+  import { useEffect, useRef, useState} from "react"; 
   export interface Layer {
     layertable: string,
     layername: string,
@@ -230,6 +230,38 @@
         })
       }).addTo(map);
       //
+          map.on("click", function (e) {
+            const { lat, lng } = e.latlng;
+
+            L.popup()
+              .setLatLng(e.latlng)
+              .setContent(`
+                <div style="font-family: Arial; min-width: 130px;">
+                  <h3 style="margin-top: 0; font-size: 16px; color: #007bff;">Tọa độ</h3>
+
+                  <div style="padding: 8px 0;">
+                    <b>Lat:</b> ${lat.toFixed(6)} <br>
+                    <b>Lng:</b> ${lng.toFixed(6)}
+                  </div>
+
+                  <button 
+                    style="
+                      padding: 8px 12px;
+                      background: #f97316;
+                      color: white;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                    onclick="window.open('https://www.windy.com/${lat}/${lng}?${lat},${lng},20', '_blank')"
+                  >
+                    Xem Windy
+                  </button>
+                </div>
+              `)
+              .openOn(map);
+          });
+
       // Cleanup when unmount
       return () => {
         map.remove();
