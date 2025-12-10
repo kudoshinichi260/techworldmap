@@ -1,4 +1,65 @@
 [
-  { "id": 1, "name": "Điểm A", "lat": 10.8, "lng": 106.6 },
-  { "id": 2, "name": "Điểm B", "lat": 10.75, "lng": 106.65 }
+    {
+        "TenDonVi": "CHOA",
+        "TenChuDonVi": "Hoàng Quốc Nam",
+        "Longtitude": 105.74452,
+        "Lattitude": 18.21048,
+        "Desc": "CHOA - Hà Tĩnh Sạch (Công ty TNHH Nông nghiệp Sạch CHOA) là thương hiệu nông sản và thực phẩm nông nghiệp chế biến công nghệ cao có nguồn gốc từ Hà Tĩnh. CHOA được xây dựng với mục tiêu mang lại giải pháp thực phẩm tự nhiên, an toàn và tiện lợi cho người tiêu dùng, đồng thời tạo giá trị bền vững cho người nông dân địa phương. Chúng tôi tập trung phát triển các dòng sản phẩm từ chính nông sản sạch của địa phương theo hướng công nghệ cao, tiện lợi, an toàn, hướng tới lối sống xanh và sức khỏe cộng đồng.",
+        "_ID": "HT25112014505558",
+        "LoaiHinh": "HTX",
+        "DienTichSX": "45000",
+        "LienHe": "0965 245 832",
+        "TrangThai": "Da_Phe_Duyet",
+        "Enabel": false,
+        "Tooltip": "CHOA - Hà Tĩnh Sạch",
+        "Enable_Maps": true
+    },
+    {
+        "TenDonVi": "Trang trại Khe Thờ",
+        "TenChuDonVi": "Huỳnh Văn Lập",
+        "Longtitude": 105.83877,
+        "Lattitude": 18.43561,
+        "Desc": "Trang trại Khe Thờ  nông sản và thực phẩm nông nghiệp chế biến công nghệ cao có nguồn gốc từ Hà Tĩnh. TRang trại được xây dựng với mục tiêu mang lại giải pháp thực phẩm tự nhiên, an toàn và tiện lợi cho người tiêu dùng, đồng thời tạo giá trị bền vững cho người nông dân địa phương. Chúng tôi tập trung phát triển các dòng sản phẩm từ chính nông sản sạch của địa phương theo hướng công nghệ cao, tiện lợi, an toàn, hướng tới lối sống xanh và sức khỏe cộng đồng.",
+        "_ID": "HT25112014543558",
+        "LoaiHinh": "Trang_trai",
+        "DienTichSX": "1000",
+        "LienHe": "0239 388 4567",
+        "DiaChi": "Thôn Khe Thờ, xã Đồng Lộc, Can Lộc",
+        "TrangThai": "Da_Phe_Duyet",
+        "Enabel": false,
+        "Tooltip": "Trang trại Khe Thờ",
+        "Enable_Maps": true
+    },
+    {
+        "TenDonVi": "Harista",
+        "TenChuDonVi": "Tú nGUYỄN",
+        "Longtitude": 105.902781,
+        "Lattitude": 18.346215,
+        "Desc": "HATISA - Hà Tĩnh Sạch (Công ty TNHH Nông nghiệp Sạch Hatisa) là thương hiệu nông sản và thực phẩm nông nghiệp chế biến công nghệ cao có nguồn gốc từ Hà Tĩnh. Hatisa được xây dựng với mục tiêu mang lại giải pháp thực phẩm tự nhiên, an toàn và tiện lợi cho người tiêu dùng, đồng thời tạo giá trị bền vững cho người nông dân địa phương. Chúng tôi tập trung phát triển các dòng sản phẩm từ chính nông sản sạch của địa phương theo hướng công nghệ cao, tiện lợi, an toàn, hướng tới lối sống xanh và sức khỏe cộng đồng.",
+        "_ID": "HT25112015050625",
+"LoaiHinh": "Trang_trai",
+        "DienTichSX": "4000",
+        "LienHe": "0337466554",
+        "DiaChi": "Phường Thành Sen, Thành phố Hà Tĩnh, Tỉnh Hà Tĩnh, Việt Nam.",
+        "TrangThai": "Da_Phe_Duyet",
+        "Enabel": false,
+        "Email": "nguyenvananhtu2004@gmail.com",
+        "Tooltip": "HATISA - Hà Tĩnh Sạch",
+        "Enable_Maps": true
+    },
+    {
+        "TenDonVi": "CUDO Hùng",
+        "TenChuDonVi": "Nguyễn Văn Hùng",
+        "Longtitude": 105.888302,
+        "Lattitude": 18.346934,
+        "_ID": "HT25112317171385",
+        "LoaiHinh": "Trang_trai",
+        "DienTichSX": "5000",
+        "LienHe": "0949381391",
+        "DiaChi": "152 Trần Phú",
+        "TrangThai": "Da_Phe_Duyet",
+        "Enabel": false,
+        "Email": "nguyenvanhung@gmail.com",
+        "Enable_Maps": true
+    }
 ]

@@ -3,7 +3,7 @@
   import "leaflet.control.layers.tree";
   import L from "leaflet";
   import styles from "./Map.module.css";
-  import { useEffect, useRef} from "react";
+  import { useEffect, useRef, useState} from "react";
   export interface Layer {
     layertable: string,
     layername: string,
@@ -12,6 +12,7 @@
   const layers: Layer[] = [
     //Biển đảo Việt Nam
     { layertable: "gis:biendao", layername: "Biển đảo", style: "biendao" },
+
     // Giao thông
     { layertable: "gis:giaothong", layername: "Giao thông", style: "giaothong" },
     { layertable: "gis:duongsat", layername: "Đường sắt",style: "duongsat" },
@@ -22,13 +23,30 @@
     { layertable: "gis:kenhmuongthuyloi", layername: "Kênh mương thủy lợi",style: "kenhmuongthuyloi" },
 
     // Biên giới - Địa giới
-     { layertable: "gis:rg_tinh_new", layername: "Ranh giới tỉnh", style: "rg_tinh_new"},
+    { layertable: "gis:rg_tinh_new", layername: "Ranh giới tỉnh", style: "rg_tinh_new"},
     { layertable: "gis:rg_kcnc_new", layername: "Ranh giới xã",style: "rg_kvnc_new"},
-   
     { layertable: "gis:htsd_dat_fix2000", layername: "Hiện trạng sử dụng đất 2024", style:"hientrangsudungdat2024" },
   ];
+  interface MarkerPoint {
+    TenDonVi: string;
+    TenChuDonVi: string;
+    Longtitude: number;
+    Lattitude: number;
+    Desc: string;
+    _ID: string;
+    LoaiHinh: string;
+    DienTichSX: string;
+    LienHe: string;
+    TrangThai: string;
+    Enabel: boolean;
+    Tooltip: string;
+    Enable_Maps: boolean;
+  }
+
   export default function Map() {
     const mapRef = useRef<L.Map | null>(null);
+    const [markers, setMarkers] = useState<MarkerPoint[]>([]);
+    console.log(markers);
     useEffect(() => {
       const map = L.map("map", {
         center: [18.34, 105.90],
@@ -36,6 +54,86 @@
         attributionControl: false,
       });
       mapRef.current = map;
+
+      // Red points 
+      const redIcon = L.icon({
+        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+        shadowUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+      });
+     fetch("/point.json")
+      .then((res) => res.json())
+      .then((data: MarkerPoint[]) => {   
+        setMarkers(data);
+
+        data.forEach((m: MarkerPoint) => {   
+          if (!m.Enable_Maps) return;
+
+          const lat = Number(m.Lattitude);
+          const lng = Number(m.Longtitude);
+
+          const popupHtml = `
+              <div style="
+                font-family: Arial, sans-serif;
+                width: 260px;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+              ">
+
+                <div style="
+                  background: #3b82f6;
+                  color: white;
+                  padding: 8px 12px;
+                  font-size: 16px;
+                  font-weight: bold;
+                ">
+                  ${m.TenDonVi}
+                </div>
+
+                <div style="padding: 10px 12px; font-size: 14px; line-height: 1.4;">
+
+                  <div style="margin-bottom: 6px;">
+                    <strong>Chủ đơn vị:</strong><br/>
+                    ${m.TenChuDonVi}
+                  </div>
+
+                  <div style="margin-bottom: 6px;">
+                    <strong>Diện tích:</strong> ${m.DienTichSX} m²
+                  </div>
+
+                  <div style="margin-bottom: 6px;">
+                    <strong>Liên hệ:</strong> ${m.LienHe}
+                  </div>
+
+                  <div style="
+                    margin-top: 6px;
+                    padding: 6px;
+                    background: #f3f4f6;
+                    border-radius: 6px;
+                    max-height: 100px;
+                    overflow-y: auto;
+                  ">
+                    ${m.Desc}
+                  </div>
+
+                </div>
+
+              </div>
+            `;
+
+
+          L.marker([lat, lng], { icon: redIcon })
+            .bindPopup(popupHtml)
+            .bindTooltip(m.Tooltip ?? m.TenDonVi)
+            .addTo(map);
+        });
+      });
+
+
       // --- BASE MAPS ---
       const street = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -131,7 +229,7 @@
           iconSize: [0, 0]
         })
       }).addTo(map);
-
+      //
       // Cleanup when unmount
       return () => {
         map.remove();
@@ -139,6 +237,8 @@
     }, []);
     
     return (
-        <div id="map" style={{ height: "100vh", width: "100%" } } />
+        <div>
+          <div id="map" style={{ height: "100vh", width: "100%" } } />
+        </div>
     );
   }
