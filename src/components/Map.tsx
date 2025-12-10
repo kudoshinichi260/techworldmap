@@ -121,8 +121,22 @@
                   </div>
 
                 </div>
-
               </div>
+              <div style="font-family: Arial; min-width: 130px;">
+                  <button 
+                    style="
+                      padding: 8px 12px;
+                      background: #f97316;
+                      color: white;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                    onclick="window.open('https://www.windy.com/${lat}/${lng}?${lat},${lng},20', '_blank')"
+                  >
+                    Xem Windy
+                  </button>
+                </div>
             `;
 
 
