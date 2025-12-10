@@ -122,7 +122,7 @@
 
                 </div>
               </div>
-              <div style="font-family: Arial; min-width: 130px;">
+              <div style="font-family: Arial; min-width: 130px; padding:8px; text-align:center;">
                   <button 
                     style="
                       padding: 8px 12px;
@@ -134,7 +134,7 @@
                     "
                     onclick="window.open('https://www.windy.com/${lat}/${lng}?${lat},${lng},20', '_blank')"
                   >
-                    Xem Windy
+                    Xem thời tiết
                   </button>
                 </div>
             `;
@@ -254,8 +254,8 @@
                   <h3 style="margin-top: 0; font-size: 16px; color: #007bff;">Tọa độ</h3>
 
                   <div style="padding: 8px 0;">
-                    <b>Lat:</b> ${lat.toFixed(6)} <br>
-                    <b>Lng:</b> ${lng.toFixed(6)}
+                    <b>Vĩ độ:</b> ${lat.toFixed(6)} <br>
+                    <b>Kinh độ:</b> ${lng.toFixed(6)}
                   </div>
 
                   <button 
@@ -269,7 +269,7 @@
                     "
                     onclick="window.open('https://www.windy.com/${lat}/${lng}?${lat},${lng},20', '_blank')"
                   >
-                    Xem Windy
+                    Xem thời tiết
                   </button>
                 </div>
               `)
