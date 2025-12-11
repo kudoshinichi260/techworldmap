@@ -64,11 +64,18 @@
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
       });
-     fetch("/point.json")
+     fetch("https://agrizone.techsolutions.vn/rest/maps/v1/htx_trangtrai",{
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    // Nếu API cần token thì thêm:
+    // "Authorization": "Bearer YOUR_TOKEN"
+  }
+})
       .then((res) => res.json())
       .then((data: MarkerPoint[]) => {   
         setMarkers(data);
-
         data.forEach((m: MarkerPoint) => {   
           if (!m.Enable_Maps) return;
 
@@ -121,7 +128,7 @@
                   </div>
 
                 </div>
-              </div>
+              </div>  
               <div style="font-family: Arial; min-width: 130px; padding:8px; text-align:center;">
                   <button 
                     style="
