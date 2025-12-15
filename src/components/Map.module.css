@@ -5,3 +5,10 @@
   text-shadow: 1px 1px 2px white;
   white-space: nowrap;
 }
+.measure-tooltip {
+  background: #ef4444;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
