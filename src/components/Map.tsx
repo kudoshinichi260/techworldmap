@@ -60,59 +60,61 @@
         attributionControl: false,
         zoomControl: false,
       });
+      // Zoom control
       L.control
       .zoom({
         position: "bottomright",
       })
       .addTo(map);
+      // Zoom Meansure Control 
+      const MeasureControl = L.Control.extend({
+      onAdd() {
+        const container = L.DomUtil.create("div");
+        container.style.cssText = `
+          background: white;
+          padding: 0 10px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          font-size: 14px;
+        `;
+
+        L.DomEvent.disableClickPropagation(container);
+
+        const root = createRoot(container);
+
+        root.render(
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span>Đo khoảng cách</span>
+                <Switch
+                  size="small"
+                  onChange={(checked) => {
+                    isMeasuring = checked;
+
+                    if (!checked) {
+                      measurePoints = [];
+                      measureLine?.remove();
+                      measureTooltip?.remove();
+                      measureMarkers.forEach((m) => m.remove());
+                      measureMarkers = [];
+                      measureLine = null;
+                      measureTooltip = null;
+                    }
+                  }}
+                />
+              </div>
+          );
+          return container;
+        },
+      });
+
+      map.addControl(new MeasureControl({ position: "bottomleft" }));
+      // Scale ruler
       L.control.scale({
         position: "bottomleft", // bottomleft | bottomright | topleft | topright
         metric: true,           // m / km
         imperial: false,        // mile / feet
         maxWidth: 150           
       }).addTo(map);
-      const MeasureControl = L.Control.extend({
-  onAdd() {
-    const container = L.DomUtil.create("div");
-    container.style.cssText = `
-      background: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    `;
-
-    L.DomEvent.disableClickPropagation(container);
-
-    const root = createRoot(container);
-
-    root.render(
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span>Đo khoảng cách</span>
-            <Switch
-              size="small"
-              onChange={(checked) => {
-                isMeasuring = checked;
-
-                if (!checked) {
-                  measurePoints = [];
-                  measureLine?.remove();
-                  measureTooltip?.remove();
-                  measureMarkers.forEach((m) => m.remove());
-                  measureMarkers = [];
-                  measureLine = null;
-                  measureTooltip = null;
-                }
-              }}
-            />
-          </div>
-          );
-          return container;
-        },
-      });
-
-
-      map.addControl(new MeasureControl({ position: "topleft" }));
 
       mapRef.current = map;
       // ================= MEASURE TOOL =================

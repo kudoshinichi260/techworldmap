@@ -1,0 +1,26 @@
+/* Xếp các control ở bottom-left theo hàng ngang */
+.leaflet-bottom.leaflet-left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* Cho phép click/drag */
+.leaflet-bottom.leaflet-left .leaflet-control {
+  pointer-events: auto;
+}
+
+/* Fix margin scale */
+.leaflet-control-scale {
+   padding: 6px 10px;
+  margin: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: none;
+}
+.leaflet-control-scale-line {
+  padding: 2px 6px;
+  line-height: 1.2;
+}
