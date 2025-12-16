@@ -24,3 +24,18 @@
   padding: 2px 6px;
   line-height: 1.2;
 }
+.island-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  text-shadow: 1px 1px 2px white;
+  white-space: nowrap;
+
+  transform-origin: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.island-label.zoom-far {
+  transform: scale(0.5);
+  opacity: 0;
+}

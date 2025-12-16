@@ -3,6 +3,7 @@
   import "leaflet.control.layers.tree";
   import L from "leaflet";
   import styles from "./Map.module.css";
+  import "../index.css"
   import { useEffect, useRef, useState} from "react"; 
   import type { MarkerPoint } from "../types/marker";
   import { createRoot } from "react-dom/client";
@@ -41,6 +42,14 @@
       zoom: Number(params.get("zoom")) || 13,
     };
   }
+  function getMapWidthInKm(map: L.Map) {
+    const bounds = map.getBounds();
+    const left = bounds.getSouthWest();
+    const right = bounds.getSouthEast();
+
+    return map.distance(left, right) / 1000; // km
+  }
+
   export default function Map() {
     const mapRef = useRef<L.Map | null>(null);
     const [markers, setMarkers] = useState<MarkerPoint[]>([]);
@@ -115,6 +124,18 @@
         imperial: false,        // mile / feet
         maxWidth: 150           
       }).addTo(map);
+      map.on("zoomend moveend", () => {
+        const km = getMapWidthInKm(map);
+
+        document.querySelectorAll(".island-label").forEach(el => {
+          // Ra khỏi phạm vi quốc gia (~ > 1200km)
+          if (km > 2000) {
+            el.classList.add("zoom-far");
+          } else {
+            el.classList.remove("zoom-far");
+          }
+        });
+      });
 
       mapRef.current = map;
       // ================= MEASURE TOOL =================
@@ -418,7 +439,7 @@
       L.marker([16.551389, 112.338889], {
         icon: L.divIcon({
           className: styles.islandLabel,
-          html: "Quần đảo Hoàng Sa (Việt Nam)",
+          html: `<div class="island-label">Quần đảo Hoàng Sa (Việt Nam)</div>`,
           iconSize: [0, 0]
         })
       }).addTo(map);
@@ -427,7 +448,7 @@
       L.marker([10.911667, 114.242500], {
         icon: L.divIcon({
           className: styles.islandLabel,
-          html: "Quần đảo Trường Sa (Việt Nam)",
+          html: `<div class="island-label">Quần đảo Trường Sa (Việt Nam)</div>`,
           iconSize: [0, 0]
         })
       }).addTo(map);

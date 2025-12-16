@@ -1,10 +1,17 @@
-.islandLabel {
+.island-label {
   font-size: 14px;
   font-weight: bold;
   color: black;
   text-shadow: 1px 1px 2px white;
   white-space: nowrap;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
+
+.island-label.zoom-far {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
 .measure-tooltip {
   background: #ef4444;
   color: white;
