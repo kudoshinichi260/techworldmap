@@ -11,6 +11,7 @@ export interface MarkerPoint {
   LoaiHinh: string;
   TrangThai: string;
 
+  DiaChi: String;
   LienHe: string;
   Desc: string;
 

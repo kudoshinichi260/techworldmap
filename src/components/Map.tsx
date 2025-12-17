@@ -228,7 +228,6 @@
           m.Images?.map((i) => i.base_code).filter(Boolean) ??
           [];
 
-          // ✅ KHỞI TẠO SLIDE (có fallback)
           window.popupSlides[m._ID] = {
             index: 0,
             images: images.length ? images : [FALLBACK_BASE64],
@@ -268,7 +267,7 @@
                   width:26px;
                   height:26px;
                   cursor:pointer;
-                ">‹</button>
+                "><</button>
 
                 <!-- Next -->
                 <button onclick="slideNext('${m._ID}')" style="
@@ -283,7 +282,7 @@
                   width:26px;
                   height:26px;
                   cursor:pointer;
-                ">›</button>
+                ">></button>
               </div>
 
 
@@ -303,10 +302,17 @@
                 <div style="padding: 12px 14px; font-size: 14px; line-height: 1.5; color: #111827;">
 
                   <div style="margin-bottom: 8px;">
-                    <strong>Chủ đơn vị:</strong><br/>
+                    <strong>Chủ đơn vị:</strong>
                     ${m.TenChuDonVi}
                   </div>
-
+                  <div style="margin-bottom: 8px;">
+                    <strong>Địa chỉ:</strong>
+                    ${m.DiaChi}
+                  </div>
+                   <div style="margin-bottom: 8px;">
+                    <strong>Tọa độ:</strong>
+                    ${m.Longtitude}, ${m.Lattitude}
+                  </div>
                   <div style="margin-bottom: 8px;">
                     <strong>Diện tích:</strong> ${m.DienTichSX} m²
                   </div>
