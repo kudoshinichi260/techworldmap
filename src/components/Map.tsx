@@ -221,7 +221,7 @@
         setMarkers(data);
         pointsRef.current = data;
         data.forEach((m: MarkerPoint) => {   
-          
+          if (m.Enable_Maps !== true) return;
           const lat = Number(m.Lattitude);
           const lng = Number(m.Longtitude);
           const images =
