@@ -11,12 +11,17 @@ export interface MarkerPoint {
   LoaiHinh: string;
   TrangThai: string;
 
-  HinhAnh: string;
   LienHe: string;
   Desc: string;
 
   Tooltip?: string;
-
+  
   Enable_Maps: boolean;
   Enabel?: boolean;
+
+  Images: [
+      {
+        "base_code": "string"
+      } 
+  ]
 }
