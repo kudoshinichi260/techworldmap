@@ -206,7 +206,7 @@
         shadowSize: [41, 41],
       });
       //https://agrizone.techsolutions.vn/rest/maps/v1/htx_trangtrai
-     fetch("/point.json",
+     fetch("https://agrizone.techsolutions.vn/rest/maps/v1/htx_trangtrai",
       {
         method: "GET",
         headers: {
