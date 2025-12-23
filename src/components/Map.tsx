@@ -32,6 +32,10 @@
     { layertable: "gis:rg_kcnc_new", layername: "Ranh giới xã",style: "rg_kvnc_new"},
     { layertable: "gis:htsd_dat_fix2000", layername: "Hiện trạng sử dụng đất 2024", 
       style:"hientrangsudungdat2024", wfs: true,popupFields: ["maloaidat"] },
+    // Thổ nhưỡng 
+    { layertable: "gis:thonhuong", layername: "Thổ nhưỡng", style: "thonhuong", 
+      wfs: true, popupFields:['loaidat']
+    }
   ];
   function getUrlParams() {
     const params = new URLSearchParams(window.location.search);
@@ -561,6 +565,13 @@
           { label: "Hiện trạng sử dụng đất 2024", layer: wmsLayers["Hiện trạng sử dụng đất 2024"] },
         ],
       };
+
+      const soilGroup = {
+        label: "Thổ nhưỡng",
+        children: [
+          { label: "Thổ nhưỡng", layer: wmsLayers["Thổ nhưỡng"] },
+        ]
+      } 
       // Control layer: Base map + Overlay WMS
       L.control.layers(baseMaps).addTo(map);
 
@@ -568,7 +579,7 @@
       (L.control.layers as any)
         .tree(
           null,
-          { label: "Hà Tĩnh", children: [waterGroup, trafficGroup, borderGroup] },
+          { label: "Hà Tĩnh", children: [waterGroup, trafficGroup, borderGroup, soilGroup] },
           { collapsed: false }
         )
         .addTo(map);
@@ -714,12 +725,18 @@
           ${
             fields
               ? fields
-                  .map(
-                    (f) =>
-                      `<b>${feature.properties?.[f] ??  "N/A"} -
-                      ${findMetadataByCode(feature.properties?.[f], data)}
-                    ` 
-                  )
+                  .map( 
+                    (f) => {
+                      const code = feature.properties?.[f];
+                    if (!code) return "";
+
+                    const metadata = findMetadataByCode(code, data);
+                    if (!metadata) {
+                      return `<b>${code}</b>`;
+                    }
+                    return `<b>${code} - ${metadata}</b>`;
+                        }
+                      )
                   .join("<br/>")
               : ""
           }
